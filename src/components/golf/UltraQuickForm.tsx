@@ -126,7 +126,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, pin_position: e.target.value })
               }
               placeholder="Back tier"
-              className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500 text-gray-900 placeholder-gray-500"
               required
             />
           </div>
@@ -142,7 +142,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, distance_on: e.target.value })
               }
               placeholder="33"
-              className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500 text-gray-900 placeholder-gray-500"
               required
             />
           </div>
@@ -158,7 +158,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, distance_from_side: e.target.value })
               }
               placeholder="5"
-              className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500 text-gray-900 placeholder-gray-500"
               required
             />
           </div>
@@ -175,7 +175,7 @@ export default function UltraQuickForm({
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               setFormData({ ...formData, side_from: e.target.value as any })
             }
-            className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500"
+            className="w-full px-2 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-500 text-gray-900"
           >
             <option value="left">Left</option>
             <option value="right">Right</option>
@@ -196,7 +196,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, front_break: e.target.value })
               }
               placeholder="Straight downhill"
-              className="w-full px-2 py-2 text-sm border border-blue-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full px-2 py-2 text-sm border border-blue-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-900 placeholder-gray-500"
             />
           </div>
 
@@ -211,7 +211,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, back_break: e.target.value })
               }
               placeholder="Downhill left"
-              className="w-full px-2 py-2 text-sm border border-green-200 rounded focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-2 py-2 text-sm border border-green-200 rounded focus:outline-none focus:ring-1 focus:ring-green-500 text-gray-900 placeholder-gray-500"
             />
           </div>
 
@@ -226,7 +226,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, left_break: e.target.value })
               }
               placeholder="From right"
-              className="w-full px-2 py-2 text-sm border border-yellow-200 rounded focus:outline-none focus:ring-1 focus:ring-yellow-500"
+              className="w-full px-2 py-2 text-sm border border-yellow-200 rounded focus:outline-none focus:ring-1 focus:ring-yellow-500 text-gray-900 placeholder-gray-500"
             />
           </div>
 
@@ -241,7 +241,7 @@ export default function UltraQuickForm({
                 setFormData({ ...formData, right_break: e.target.value })
               }
               placeholder="Slight left"
-              className="w-full px-2 py-2 text-sm border border-red-200 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+              className="w-full px-2 py-2 text-sm border border-red-200 rounded focus:outline-none focus:ring-1 focus:ring-red-500 text-gray-900 placeholder-gray-500"
             />
           </div>
         </div>

@@ -24,3 +24,29 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Mobile form input improvements */
+input,
+select,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #111827 !important; /* text-gray-900 */
+}
+
+/* Ensure good contrast on mobile */
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important; /* text-gray-500 */
+}
+
+/* Mobile-specific input styling */
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    color: #111827 !important;
+  }
+}

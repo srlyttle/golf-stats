@@ -10,7 +10,7 @@ import GreenReadingList from "@/components/golf/GreenReadingList";
 export default function DashboardClient() {
   const [courses, setCourses] = useState<GolfCourse[]>([]);
   const [holes, setHoles] = useState<Hole[]>([]);
-  const [selectedCourse, setSelectedCourse] = useState<string>("");
+  const [selectedCourse, setSelectedCourse] = useState<GolfCourse | null>(null);
   const [selectedHole, setSelectedHole] = useState<string>("");
   const [currentHoleIndex, setCurrentHoleIndex] = useState<number>(0);
   const [showAddCourse, setShowAddCourse] = useState(false);
@@ -25,9 +25,17 @@ export default function DashboardClient() {
     fetchCourses();
   }, []);
 
+  // Auto-select first course when courses are loaded
   useEffect(() => {
-    if (selectedCourse) {
-      fetchHoles(selectedCourse);
+    if (courses.length > 0 && !selectedCourse) {
+      setSelectedCourse(courses[0]);
+      console.log("Auto-selecting first course:", courses[0].name);
+    }
+  }, [courses, selectedCourse]);
+
+  useEffect(() => {
+    if (selectedCourse?.id) {
+      fetchHoles(selectedCourse.id);
     }
   }, [selectedCourse]);
 
@@ -105,17 +113,22 @@ export default function DashboardClient() {
       fetchCourses();
 
       // Auto-select the new course
-      setSelectedCourse(courseData.id);
+      setSelectedCourse(courseData);
     } catch (error) {
       console.error("Error adding course:", error);
     }
   };
 
   const addHole = async () => {
+    if (!selectedCourse?.id) {
+      console.error("No course selected");
+      return;
+    }
+
     try {
       // Create all 18 holes at once
       const holesToCreate = Array.from({ length: 18 }, (_, i) => ({
-        course_id: selectedCourse,
+        course_id: selectedCourse.id,
         hole_number: i + 1,
       }));
 
@@ -124,7 +137,9 @@ export default function DashboardClient() {
       if (error) throw error;
 
       setShowAddHole(false);
-      fetchHoles(selectedCourse);
+      if (selectedCourse?.id) {
+        fetchHoles(selectedCourse.id);
+      }
     } catch (error) {
       console.error("Error adding holes:", error);
     }
@@ -257,7 +272,7 @@ export default function DashboardClient() {
                     <div className="p-2 bg-green-50 border border-green-200 rounded-md">
                       <p className="text-sm text-green-800">
                         <span className="font-medium">Active Course:</span>{" "}
-                        {courses.find((c) => c.id === selectedCourse)?.name}
+                        {selectedCourse?.name}
                       </p>
                       <p className="text-xs text-green-600 mt-1">
                         Course will stay selected until you change it
@@ -292,13 +307,16 @@ export default function DashboardClient() {
                   )}
 
                   <select
-                    value={selectedCourse}
+                    value={selectedCourse?.id || ""}
                     onChange={(e) => {
-                      setSelectedCourse(e.target.value);
+                      const course = courses.find(
+                        (c) => c.id === e.target.value
+                      );
+                      setSelectedCourse(course || null);
                       setSelectedHole("");
                       setCurrentHoleIndex(0);
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 placeholder-gray-500"
                   >
                     <option value="">Select a course</option>
                     {courses.map((course) => (
@@ -388,7 +406,7 @@ export default function DashboardClient() {
                         );
                         setCurrentHoleIndex(holeIndex >= 0 ? holeIndex : 0);
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 text-gray-900 placeholder-gray-500"
                     >
                       <option value="">Select a hole</option>
                       {holes.map((hole) => (
